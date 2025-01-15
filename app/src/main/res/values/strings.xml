@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Rechic</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="don_t_have_a_username_click_here">Don\'t have a username? Click here</string>
+    <string name="user_name">User Name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="adress">Adress</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
+    <string name="maps_api_key">AIzaSyC6IEUp8I3bR6vst3-I2ui6v6DqelcB6JE</string>
+    <string name="location_isn_t_chosen_yet">Pick Address</string>
+    <string name="location_is_chosen">Valid Address</string>
+    <string name="settings">Settings</string>
+    <string name="update">Update</string>
+    <string name="phone_number">Phone Number</string>
+</resources>

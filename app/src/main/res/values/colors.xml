@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="auth_background_color">#C0B8AC</color>
+    <color name="app_background">#EBE9E3</color>
+    <color name="button_color">#BFB6A2</color>
+    <color name="color_dont">#C1B8AC</color>
+    <color name="app_text_color">#8F7E6E</color>
+
+
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.rechic.HomeFragment"
+        android:label="fragment_home"
+        app:popUpTo="@id/main_nav_graph"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/location"
+        android:name="com.example.rechic.LocationFragment"
+        android:label="fragment_location"
+        app:popUpTo="@id/main_nav_graph"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.rechic.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        app:popUpTo="@id/main_nav_graph"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profile_to_settingsProfileFragment"
+            app:destination="@id/settingsProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsProfileFragment"
+        android:name="com.example.rechic.fragments.SettingsProfileFragment"
+        android:label="SettingsProfileFragment">
+        <action
+            android:id="@+id/action_settingsProfileFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.rechic.fragments.MapsFragment"
+        android:label="MapsFragment" />
+</navigation>
