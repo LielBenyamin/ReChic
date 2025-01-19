@@ -72,14 +72,14 @@
             app:cornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/soldText"
+            app:layout_constraintStart_toEndOf="@id/itemsText"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/soldText"
+            android:id="@+id/itemsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sold:99"
+            android:text="Items:"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/settingsButton"
             app:layout_constraintEnd_toStartOf="@id/settingsButton"
@@ -96,6 +96,26 @@
         android:background="@color/app_background"
         android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@+id/settings" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sep1"
+        app:spanCount="2" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add2"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,8 @@ package viewmodels
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.rechic.model.UserProfile
+import com.example.rechic.database.local.entities.UserProfileEntity
+
 import com.example.rechic.repository.ImageRepository
 import com.example.rechic.repository.UserRepository
 import com.example.rechic.utils.ValidationUtils
@@ -113,16 +114,16 @@ class AuthViewModel(
                 return@launch
             }
 
-            val user = UserProfile(
+            val user = UserProfileEntity(
                 userName = userName,
                 email = email,
                 profileImageUrl = profileImageUrl,
                 location = location,
                 phoneNumber = phoneNumber,
+                userUid = userId,
             )
 
             userRepository.saveUser(
-                userId = userId,
                 user = user,
             )
             _authState.emit(FireBaseState.Success)

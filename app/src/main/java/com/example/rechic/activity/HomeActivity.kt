@@ -9,25 +9,26 @@ import com.example.rechic.R
 import com.example.rechic.databinding.ActivityHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import viewmodels.ProfileViewModel
+import viewmodels.HomeActivityViewModel
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
     private lateinit var binding: ActivityHomeBinding
 
+    private val homeViewModel: HomeActivityViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val fragments =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = fragments.navController
         binding.bottomNav.setupWithNavController(navController)
         bottomNavItemChangeListener(binding.bottomNav)
-
+        homeViewModel.syncData()
     }
 
     private fun bottomNavItemChangeListener(navView: BottomNavigationView) {
