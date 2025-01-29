@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -27,7 +26,6 @@ class ProfileViewModel(
     private val productsRepository: ProductRepository,
     private val imageRepository: ImageRepository,
 ) : ViewModel() {
-
 
     private val _selectedLocation = MutableStateFlow<LatLng?>(null)
 
@@ -47,7 +45,7 @@ class ProfileViewModel(
     )
 
     val allUserProducts: StateFlow<List<ProductWithUserProfile>> =
-        productsRepository.getAllProductsByOwnerIdFlow(
+        productsRepository.getAllProductsWithUserProfileByOwnerIdFlow(
             FirebaseAuth.getInstance().currentUser?.uid ?: ""
         ).stateIn(
             scope = viewModelScope,
@@ -82,7 +80,7 @@ class ProfileViewModel(
             _upadteState.emit(FireBaseState.Error("Invalid Phone Number"))
             return@launch
         }
-        val userProfile = userProfile.value
+        val userProfile = userRepository.getCurrentUserProfile(uid)
         if (userProfile == null) {
             _upadteState.emit(FireBaseState.Error("Internal Error"))
             return@launch

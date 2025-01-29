@@ -18,11 +18,15 @@
     </fragment>
     <fragment
         android:id="@+id/location"
-        android:name="com.example.rechic.LocationFragment"
+        android:name="com.example.rechic.fragments.MapUsersFragment"
         android:label="fragment_location"
         app:popUpTo="@id/main_nav_graph"
         app:popUpToInclusive="true"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_location_to_userProfileProductFragment"
+            app:destination="@id/userProfileProductFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.example.rechic.fragments.ProfileFragment"
@@ -69,5 +73,13 @@
         <argument
             android:name="productWrapper"
             app:argType="com.example.rechic.model.ProductWithUserProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileProductFragment"
+        android:name="com.example.rechic.fragments.UserProfileProductFragment"
+        android:label="UserProfileProductFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.example.rechic.database.local.entities.UserProfileEntity" />
     </fragment>
 </navigation>

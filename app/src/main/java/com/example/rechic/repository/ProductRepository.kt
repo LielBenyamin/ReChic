@@ -42,7 +42,7 @@ class ProductRepository(
     }
 
     // Function to get all products by ownerId and map them to ProductWithUserProfile
-    fun getAllProductsByOwnerIdFlow(ownerUid: String): Flow<List<ProductWithUserProfile>> {
+    fun getAllProductsWithUserProfileByOwnerIdFlow(ownerUid: String): Flow<List<ProductWithUserProfile>> {
         return productDao.getProductsByOwnerid(ownerUid).map { products ->
             mapProductsToProductWithUserProfile(products)
         }

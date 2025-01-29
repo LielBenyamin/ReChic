@@ -23,6 +23,9 @@ interface UserProfileDao {
     @Query("SELECT * FROM user_profiles WHERE userUid = :userUid")
     fun getUserProfileByUidFlow(userUid: String): Flow<UserProfileEntity?>
 
+    @Query("SELECT * FROM user_profiles")
+    fun getAllUsersFlow(): Flow<List<UserProfileEntity>>
+
     @Query("DELETE FROM user_profiles WHERE userUid = :userUid")
     suspend fun deleteUserProfileByUid(userUid: String)
 

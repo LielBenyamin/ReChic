@@ -8,5 +8,26 @@
     <color name="color_dont">#C1B8AC</color>
     <color name="app_text_color">#8F7E6E</color>
 
+    <color name="colorPrimary">#A68D7B</color>
+    <color name="colorPrimaryVariant">#8C7463</color>
+    <color name="colorOnPrimary">#FAF4EF</color>
 
+    <!-- Secondary Colors -->
+    <color name="colorSecondary">#C4A287</color>
+    <color name="colorSecondaryVariant">#B38E75</color>
+    <color name="colorOnSecondary">#3E2F27</color>
+
+    <!-- Background and Surface -->
+    <color name="colorBackground">#F5EFE6</color>
+    <color name="colorSurface">#E8DFD6</color>
+    <color name="colorOnBackground">#5A4A3C</color>
+    <color name="colorOnSurface">#6D5C4F</color>
+
+    <!-- Error Colors -->
+    <color name="colorError">#D47B7B</color>
+    <color name="colorOnError">#FFFFFF</color>
+
+    <!-- Status Bar -->
+    <color name="statusBarColor">#8C7463</color>
 </resources>
+

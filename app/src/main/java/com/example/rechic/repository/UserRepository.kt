@@ -17,7 +17,6 @@ class UserRepository(
         userFirebaseDB.saveUser(user)
     }
 
-
     suspend fun updateUserProfileFields(
         userId: String,
         keys: List<String>,
@@ -35,4 +34,8 @@ class UserRepository(
     }
 
     fun getUserProfileFlow(uid: String) = userDao.getUserProfileByUidFlow(uid)
+
+    fun getAllUsersFlow() = userDao.getAllUsersFlow()
+
+    suspend fun getCurrentUserProfile(uid: String) = userDao.getUserProfileByUid(uid)
 }

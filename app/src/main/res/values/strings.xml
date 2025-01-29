@@ -23,4 +23,5 @@
     <string name="product_name">Product name</string>
     <string name="items_text">Items:%1$d</string>
     <string name="price_text">Price: </string>
+    <string name="contact">Contact</string>
 </resources>

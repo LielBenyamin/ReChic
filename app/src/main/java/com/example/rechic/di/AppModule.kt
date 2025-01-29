@@ -16,6 +16,7 @@ import viewmodels.AddEditProductViewModel
 import viewmodels.AuthViewModel
 import viewmodels.HomeActivityViewModel
 import viewmodels.HomeFragmentViewModel
+import viewmodels.MapUsersViewModel
 import viewmodels.ProfileViewModel
 
 val appModule = module {
@@ -57,6 +58,12 @@ val appModule = module {
     viewModel {
         HomeFragmentViewModel(
             productsRepository = get(),
+            userRepository = get(),
+        )
+    }
+
+    viewModel {
+        MapUsersViewModel(
             userRepository = get(),
         )
     }

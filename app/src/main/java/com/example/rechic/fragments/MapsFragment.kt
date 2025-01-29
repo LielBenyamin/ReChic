@@ -1,7 +1,12 @@
 package com.example.rechic.fragments
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.rechic.R
 import com.example.rechic.databinding.FragmentMapsBinding
@@ -22,11 +27,35 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(FragmentMapsBinding::infl
     private lateinit var googleMap: GoogleMap
     private var selectedLocation: LatLng? = null
     private var marker: Marker? = null
+    private val defaultLocation = LatLng(32.0879976, 34.8383596)
+
+    private val locationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            enableMyLocation()
+        } else {
+            // Handle permission denial gracefully, fallback to default location
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 10f))
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
 
+    }
+
+    private fun enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            googleMap.isMyLocationEnabled = true
+            googleMap.uiSettings.isMyLocationButtonEnabled = true
+        }
     }
 
     private fun initViews() {
@@ -41,11 +70,18 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(FragmentMapsBinding::infl
         }
     }
 
+
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
-        val defaultLocation = LatLng(32.0879976, 34.8383596)
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 10f))
         googleMap.setOnMapClickListener { latLng -> onMapClicked(latLng) }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED) {
+            enableMyLocation()
+        } else {
+            // Request location permission
+            locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
     }
 
     private fun onMapClicked(latLng: LatLng) {
