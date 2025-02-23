@@ -19,7 +19,7 @@ object ValidationUtils {
      * @return True if the phone number is valid, false otherwise.
      */
     fun isValidPhoneNumber(phone: String): Boolean {
-        val phonePattern = "^0[0-9]{9}$"
+        val phonePattern = "^[1-9][0-9]{8}$"
         return phone.matches(phonePattern.toRegex())
     }
 

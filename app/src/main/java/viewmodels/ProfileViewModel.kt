@@ -65,6 +65,7 @@ class ProfileViewModel(
     fun onUpdatedClicked(
         userName: String,
         phoneNumber: String,
+        prefixNumber: String,
     ) = viewModelScope.launch(Dispatchers.IO) {
         _upadteState.emit(FireBaseState.Loading)
         val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -72,7 +73,7 @@ class ProfileViewModel(
             _upadteState.emit(FireBaseState.Error("Internal Error"))
             return@launch
         }
-        if (ValidationUtils.areFieldsEmpty(userName, phoneNumber)) {
+        if (ValidationUtils.areFieldsEmpty(userName, phoneNumber, prefixNumber)) {
             _upadteState.emit(FireBaseState.Error("Fields cannot be empty"))
             return@launch
         }
@@ -97,10 +98,11 @@ class ProfileViewModel(
             listValues.add(userName)
             userProfileCopy = userProfileCopy.copy(userName = userName)
         }
-        if (phoneNumber != userProfile.phoneNumber) {
+        val phoneNumberWithPrefix = "$prefixNumber$phoneNumber"
+        if (phoneNumberWithPrefix != userProfile.phoneNumber) {
             listFields.add(UserProfileEntity::phoneNumber.name)
-            listValues.add(phoneNumber)
-            userProfileCopy = userProfileCopy.copy(phoneNumber = phoneNumber)
+            listValues.add(phoneNumberWithPrefix)
+            userProfileCopy = userProfileCopy.copy(phoneNumber = phoneNumberWithPrefix)
         }
         val selectedLocaiton = _selectedLocation.value
         if (selectedLocaiton != null) {
@@ -142,5 +144,19 @@ class ProfileViewModel(
         viewModelScope.launch {
             productsRepository.deleteProduct(productEntity)
         }
+    }
+
+    fun getPrefixFromPhone(phone: String): String {
+        if (phone.length > 9) {
+            return phone.substring(0, phone.length - 9) // Remove last 9 digits
+        }
+        return phone // Return unchanged if too short
+    }
+
+    fun getSuffixFromPhone(phone: String): String {
+        if (phone.length > 9) {
+            return phone.substring(phone.length - 9, phone.length)
+        }
+        return phone
     }
 }

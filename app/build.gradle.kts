@@ -86,4 +86,7 @@ dependencies {
     implementation(libs.gson)
 
     implementation(libs.androidx.swiperefreshlayout)
+
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
 }

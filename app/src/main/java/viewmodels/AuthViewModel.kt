@@ -1,9 +1,11 @@
 package viewmodels
 
 import android.net.Uri
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rechic.database.local.entities.UserProfileEntity
+import com.example.rechic.model.Country
 
 import com.example.rechic.repository.ImageRepository
 import com.example.rechic.repository.UserRepository
@@ -29,6 +31,9 @@ class AuthViewModel(
 
     private val _profileImageUri = MutableStateFlow<Uri?>(null)
     val profileImageUri: StateFlow<Uri?> get() = _profileImageUri
+
+    private val _selectedCountry = MutableStateFlow<Country?>(null)
+    val selectedCountry: StateFlow<Country?> get() = _selectedCountry
 
     // Update image URI method
     fun updateProfileImageUri(uri: Uri) {
@@ -63,9 +68,18 @@ class AuthViewModel(
         password: String,
         confirmPassword: String,
         phoneNumber: String,
+        phoneNumberPrefix: String,
     ) = viewModelScope.launch(Dispatchers.IO) {
         _authState.emit(FireBaseState.Loading)
-        if (ValidationUtils.areFieldsEmpty(phoneNumber, email, password, confirmPassword, userName)) {
+        if (ValidationUtils.areFieldsEmpty(
+                phoneNumber,
+                email,
+                password,
+                confirmPassword,
+                userName,
+                phoneNumberPrefix,
+            )
+        ) {
             _authState.emit(FireBaseState.Error("All fields are required"))
             return@launch
         }
@@ -119,7 +133,7 @@ class AuthViewModel(
                 email = email,
                 profileImageUrl = profileImageUrl,
                 location = location,
-                phoneNumber = phoneNumber,
+                phoneNumber = phoneNumberPrefix + phoneNumber,
                 userUid = userId,
             )
 
@@ -131,5 +145,9 @@ class AuthViewModel(
         } catch (e: Exception) {
             _authState.emit(FireBaseState.Error("Registration failed: ${e.localizedMessage}"))
         }
+    }
+
+    fun setSelectedCountry(country: Country?) {
+        _selectedCountry.value = country
     }
 }
